@@ -15,7 +15,7 @@ Petstore data using a set of individual calls
 
 ## 🐋 To get started
 
-1. Run `git clone 'link project GitHub'`.
+1. Run `git clone https://github.com/WilmerRS/pet-store-api.git`.
 2. Run `composer install`
 3. Run `cp .env.example .env` or copy `.env.example` `.env`
 4. Run `php artisan key:generate`
