@@ -33,6 +33,7 @@ Petstore data using a set of individual calls
 - [x] Create, Search, Update and Get all operations for pets
 - [x] CRUD operations for categories
 - [x] CRUD operations for status
+- [x] Pictures for pets and image treatment
 
 ## 🐻‍❄️ HTTP Schema
 
