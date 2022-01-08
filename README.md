@@ -30,8 +30,8 @@ Petstore data using a set of individual calls
 - [x] Roles by user
 - [x] Create and get operations for users
 - [x] Create, Search, Update and Get all operations for pets
-- [ ] CRUD operations for categories
-- [ ] CRUD operations for status
+- [x] CRUD operations for categories
+- [x] CRUD operations for status
 
 ## 🐻‍❄️ HTTP Schema
 
@@ -39,7 +39,7 @@ Petstore data using a set of individual calls
 `GET` `/pets`
 - `/pets?paginated=10&page=1`
 - `/pets?category_id=1&status_id=1`
-```json
+```javascript
 GET /pets
 {
   "code": 200,
@@ -61,7 +61,7 @@ GET /pets
 ```
 
 `GET` `/pets/{pet-slug}`
-```json
+```javascript
 GET /pets/my-dog
 {
     "code": 200,
@@ -81,7 +81,7 @@ GET /pets/my-dog
 ```
 
 `POST` `/pets`
-```json
+```javascript
 POST /pets
 {
   "name": "name3",
@@ -93,7 +93,7 @@ POST /pets
 ```
 
 `PATCH` `/pets`
-```json
+```javascript
 PATCH /pets
 {
   "name": "name3",
