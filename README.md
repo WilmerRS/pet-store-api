@@ -22,7 +22,8 @@ Petstore data using a set of individual calls
 5. Run `php artisan migrate`
 6. Run `php artisan db:seed`
 7. Run `php artisan serve`
-8. Enjoy! 🎊
+8. Run `php artisan storage:link`
+9. Enjoy! 🎊
 
 ## 🐣 Features
 
