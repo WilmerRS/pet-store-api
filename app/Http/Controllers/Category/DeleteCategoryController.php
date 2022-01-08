@@ -8,20 +8,12 @@ use App\Models\Category;
 
 class DeleteCategoryController extends Controller
 {
-  public function __invoke($slug)
+  public function __invoke(Category $category)
   {
-    $status = Category::where('slug', $slug);
-    if (empty($status) || !$status->exists()) {
-      return ResponseFactory::create(
-        'Category not found.',
-        ['Category with [slug: ' . $slug . '] not found.'],
-        404
-      );
-    }
-    $status->delete();
+    $category->delete();
     return ResponseFactory::create(
       'Category deleted successfully.',
-      ['category' => $status]
+      ['category' => $category]
     );
   }
 }

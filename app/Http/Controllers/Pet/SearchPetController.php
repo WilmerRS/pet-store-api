@@ -8,20 +8,11 @@ use App\Models\Pet;
 
 class SearchPetController extends Controller
 {
-  public function __invoke($slug)
+  public function __invoke(Pet $pet)
   {
-    $pet = Pet::where('slug', $slug);
-    if (empty($pet) || !$pet->exists()) {
-      return ResponseFactory::create(
-        'Pet not found.',
-        ['Pet with [slug: '.$slug.'] not found.'],
-        404
-      );
-    }
-
     return ResponseFactory::create(
       'Pet retrieved successfully.',
-      ['pet' => $pet->with('category', 'status')->first()]
+      ['pet' => $pet->with('category', 'status')->findOrFail($pet->id)]
     );
   }
 }

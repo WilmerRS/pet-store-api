@@ -8,16 +8,8 @@ use App\Models\Status;
 
 class DeleteStatusController extends Controller
 {
-    public function __invoke($slug)
+    public function __invoke(Status $status)
     {
-      $status = Status::where('slug', $slug);
-      if (empty($status) || !$status->exists()) {
-        return ResponseFactory::create(
-          'Status not found.',
-          ['Status with [slug: ' . $slug . '] not found.'],
-          404
-        );
-      }
       $status->delete();
       return ResponseFactory::create(
         'Status deleted successfully.',

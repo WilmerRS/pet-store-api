@@ -8,20 +8,11 @@ use App\Models\Status;
 
 class SearchStatusController extends Controller
 {
-    public function __invoke($slug)
+    public function __invoke(Status $status)
     {
-      $status = Status::where('slug', $slug);
-      if (empty($status) || !$status->exists()) {
-        return ResponseFactory::create(
-          'Status not found.',
-          ['Status with [slug: '.$slug.'] not found.'],
-          404
-        );
-      }
-
       return ResponseFactory::create(
         'Status retrieved successfully.',
-        ['status' => $status->first()]
+        ['status' => $status]
       );
     }
 }

@@ -10,17 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class DeletePetController extends Controller
 {
-  public function __invoke($slug)
+  public function __invoke(Pet $pet)
   {
-    $pet = Pet::where('slug', $slug);
-    if (empty($pet) || !$pet->exists()) {
-      return ResponseFactory::create(
-        'Pet not found.',
-        ['Pet with [slug: ' . $slug . '] not found.'],
-        404
-      );
-    }
-
     $pictures = Picture::where('pet_id', $pet->id)->get();
     foreach ($pictures as $picture) {
       Storage::delete($picture->path);

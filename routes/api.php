@@ -69,3 +69,8 @@ Route::middleware(['api'])->group(function () {
   Route::post('/auth/register', RegisterUserController::class)->name('auth.register');
   Route::post('/auth/login', LogInUserController::class)->name('auth.login');
 });
+
+Route::get('/test', function () {
+  $pet = \App\Models\Pet::findOrFail('judy-lind', 'slug');
+  return response()->json(['message' => $pet]);
+});

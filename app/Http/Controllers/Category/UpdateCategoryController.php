@@ -9,18 +9,10 @@ use App\Models\Category;
 
 class UpdateCategoryController extends Controller
 {
-    public function __invoke(SaveCategoryRequest $request, $slug)
+    public function __invoke(SaveCategoryRequest $request, Category $category)
     {
-      $status = Category::where('slug', $slug)->first();
-      if (empty($status) || !$status->exists()) {
-        return ResponseFactory::create(
-          'Category not found.',
-          ['Category with [slug: ' . $slug . '] not found.'],
-          404
-        );
-      }
 
-      $status->update($request->only(
+      $category->update($request->only(
         'name',
         'slug',
         'description'
@@ -28,7 +20,7 @@ class UpdateCategoryController extends Controller
 
       return ResponseFactory::create(
         'Category updated.',
-        ['category' => $status],
+        ['category' => $category],
       );
     }
 }

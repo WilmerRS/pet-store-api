@@ -10,21 +10,14 @@ use Illuminate\Support\Facades\Storage;
 
 class DeletePictureByPetController extends Controller
 {
-    public function __invoke(Request $request, $picture_id)
+    public function __invoke(Request $request, Picture $picture)
     {
-      $picture = Picture::where('id', $picture_id)->first();
-      if (empty($picture) || !$picture->exists()) {
-        return ResponseFactory::create(
-          'Picture not found.',
-          ['Picture with [id: ' . $picture_id . '] not found.'],
-          404
-        );
-      }
+      $label = $picture->label;
       Storage::delete($picture->path);
       $picture->delete();
       return ResponseFactory::create(
         'Picture deleted.',
-        ['Picture with [id: ' . $picture_id . '] deleted.']
+        ['Picture with [label: ' . $label . '] deleted.']
       );
     }
 }

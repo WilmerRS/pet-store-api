@@ -9,17 +9,8 @@ use App\Models\Status;
 
 class UpdateStatusController extends Controller
 {
-    public function __invoke(SaveStatusRequest $request, $slug)
+    public function __invoke(SaveStatusRequest $request, Status $status)
     {
-      $status = Status::where('slug', $slug)->first();
-      if (empty($status) || !$status->exists()) {
-        return ResponseFactory::create(
-          'Status not found.',
-          ['Status with [slug: ' . $slug . '] not found.'],
-          404
-        );
-      }
-
       $status->update($request->only(
         'name',
         'slug',

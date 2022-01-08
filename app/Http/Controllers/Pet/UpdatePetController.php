@@ -9,18 +9,8 @@ use App\Models\Pet;
 
 class UpdatePetController extends Controller
 {
-  public function __invoke(SavePetRequest $request, $slug)
+  public function __invoke(SavePetRequest $request, Pet $pet)
   {
-
-    $pet = Pet::where('slug', $slug)->first();
-    if (empty($pet) || !$pet->exists()) {
-      return ResponseFactory::create(
-        'Pet not found.',
-        ['Pet with [slug: ' . $slug . '] not found.'],
-        404
-      );
-    }
-
     $pet->update($request->only(
       'name',
       'slug',
@@ -31,7 +21,7 @@ class UpdatePetController extends Controller
 
     return ResponseFactory::create(
       'Pet updated.',
-      ['set' => $pet],
+      ['pet' => $pet],
     );
   }
 }

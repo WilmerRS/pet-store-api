@@ -12,17 +12,8 @@ use Intervention\Image\Facades\Image;
 
 class UploadPicturePetController extends Controller
 {
-  public function __invoke(UploadPictureRequest $request, $slug)
+  public function __invoke(UploadPictureRequest $request, Pet $pet)
   {
-    $pet = Pet::where('slug', $slug)->first();
-    if (empty($pet) || !$pet->exists()) {
-      return ResponseFactory::create(
-        'Pet not found.',
-        ['Pet with [slug: ' . $slug . '] not found.'],
-        404
-      );
-    }
-
     $uploadFolder = 'pictures/pets';
     $image = $request->file('picture');
 
