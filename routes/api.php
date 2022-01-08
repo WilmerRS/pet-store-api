@@ -13,6 +13,7 @@ use App\Http\Controllers\Pet\DeletePetController;
 use App\Http\Controllers\Pet\GetAllPetController;
 use App\Http\Controllers\Pet\SearchPetController;
 use App\Http\Controllers\Pet\UpdatePetController;
+use App\Http\Controllers\Picture\GetAllPicturesByPetController;
 use App\Http\Controllers\Picture\UploadPicturePetController;
 use App\Http\Controllers\Status\CreateStatusController;
 use App\Http\Controllers\Status\DeleteStatusController;
@@ -46,6 +47,7 @@ Route::middleware(['api', 'auth:sanctum'])->group(function () {
   Route::delete('/pets/{pet}', DeletePetController::class)->name('pet.delete');
 
   Route::post('/pets/{pet}/pictures', UploadPicturePetController::class)->name('pet.picture.upload');
+  Route::get('/pets/{pet}/pictures', GetAllPicturesByPetController::class)->name('pet.picture.get_all');
 
   Route::get('/statuses', GetAllStatusController::class)->name('status.get_all');
   Route::get('/statuses/{status}', SearchStatusController::class)->name('status.search');
