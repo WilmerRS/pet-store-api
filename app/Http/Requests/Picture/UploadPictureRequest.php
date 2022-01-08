@@ -2,12 +2,9 @@
 
 namespace App\Http\Requests\Picture;
 
-use App\Http\Response\ResponseFactory;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
+use App\Http\Requests\FormRequestApi;
 
-class UploadPictureRequest extends FormRequest
+class UploadPictureRequest extends FormRequestApi
 {
   public function authorize()
   {
@@ -21,17 +18,5 @@ class UploadPictureRequest extends FormRequest
       'description' => 'string',
       'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
-  }
-
-  protected function failedValidation(Validator $validator)
-  {
-    $response = ResponseFactory::create(
-      'The fields entered with are correct',
-      $validator->errors(),
-      422
-    );
-    throw (new ValidationException($validator, $response))
-      ->errorBag($this->errorBag)
-      ->redirectTo($this->getRedirectUrl());
   }
 }

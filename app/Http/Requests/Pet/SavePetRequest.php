@@ -2,30 +2,15 @@
 
 namespace App\Http\Requests\Pet;
 
-use App\Http\Response\ResponseFactory;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Request;
+use App\Http\Requests\FormRequestApi;
 
-class SavePetRequest extends FormRequest
+class SavePetRequest extends FormRequestApi
 {
-  /**
-   * Determine if the user is authorized to make this request.
-   *
-   * @return bool
-   */
   public function authorize()
   {
     return true;
   }
 
-  /**
-   * Get the validation rules that apply to the request.
-   *
-   * @return array
-   */
   public function rules()
   {
     $method = $this->method();
@@ -47,17 +32,5 @@ class SavePetRequest extends FormRequest
       $rules['slug'][] = 'unique:pets,slug';
     }
     return $rules;
-  }
-
-  protected function failedValidation(Validator $validator)
-  {
-    $response = ResponseFactory::create(
-      'The fields entered with are correct',
-      $validator->errors(),
-      422
-    );
-    throw (new ValidationException($validator, $response))
-      ->errorBag($this->errorBag)
-      ->redirectTo($this->getRedirectUrl());
   }
 }

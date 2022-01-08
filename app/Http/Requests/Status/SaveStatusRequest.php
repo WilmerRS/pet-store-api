@@ -2,12 +2,9 @@
 
 namespace App\Http\Requests\Status;
 
-use App\Http\Response\ResponseFactory;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
+use App\Http\Requests\FormRequestApi;
 
-class SaveStatusRequest extends FormRequest
+class SaveStatusRequest extends FormRequestApi
 {
 
   public function authorize()
@@ -34,17 +31,5 @@ class SaveStatusRequest extends FormRequest
       $rules['slug'][] = 'unique:statuses,slug';
     }
     return $rules;
-  }
-
-  protected function failedValidation(Validator $validator)
-  {
-    $response = ResponseFactory::create(
-      'The fields entered with are correct',
-      $validator->errors(),
-      422
-    );
-    throw (new ValidationException($validator, $response))
-      ->errorBag($this->errorBag)
-      ->redirectTo($this->getRedirectUrl());
   }
 }
